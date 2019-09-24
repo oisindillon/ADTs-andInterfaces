@@ -1,4 +1,4 @@
-
+import java.util.regex.Pattern;
 
 public class Set extends Setable{
     
@@ -8,7 +8,7 @@ public class Set extends Setable{
         Scanner input = new Scanner(System.in);
     }
 
-    Exception errorCheck(){     //will check if there are any errors with the set and/or the identifiers
+    Exception errorCheck(){
        try{
         nextCharIsOpen(c);
        }catch(Exception e){
