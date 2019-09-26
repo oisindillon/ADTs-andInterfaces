@@ -12,11 +12,11 @@ public interface SetInterface{
  * 
  * Set();
  *   PRE  -
- *   POST - A new Set-object has been created and contains an empty set
+ *   POST - A new Set-object has been created and is an empty set
  * 
  * Set (Set src);
  *   PRE  -
- *   POST - A new Set-object has been created and contains a copy of src
+ *   POST - A new Set-object has been created and is a copy of src
  * 
  */
 
@@ -26,12 +26,12 @@ void init();
  */
 
 void remove (IdentifierInterface identifier);
-/*  PRE    - The identifier must exist in the set
-    POST   - The identifier is removed from the set
+/*  PRE    - 
+    POST   - The identifier is not in the set 
 */ 
 
 boolean contains (IdentifierInterface identifier);
-/*  PRE    - The set must be not empty
+/*  PRE    - 
     POST   - true:  The set does contain the identifier
              false: The set does not contain the identifier
 */ 
