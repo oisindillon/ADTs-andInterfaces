@@ -1,60 +1,69 @@
 public interface SetInterface{
-    public static final int MAX_SET_LENGTH = 10;
-    public static final String END = "}";
-    public static final String START = "{";
-/*
- *
- * Only identifiers, following the restrictions used in this assignments, are allowed as elements of a set.
- * 
- */
 
-/*
- *
- * The four operations on sets are defined as follows:
- * 1. dierence: all elements contained in the 1st but not the 2nd set.
- * 2. intersection: all elements contained in both sets.
- * 3. union: all elements of both sets. (N.B. sets do not contain duplicate elements per definition.)
- * 4. symmetric dierence: all elements of both sets that are not contained in the intersection.
- * 
- */
-
- // Write the conditions here:
+    public static final int MAX_SET_LENGTH = 20; //How to deal with union when it turns out to be too big?
 
 /* 
  * 
- * Elements: Identifiers
+ * Elements: Objects of type Identfier
  * Structure: non-linear 
- * Domain: ???
+ * Domain: Rows of objects of type Identifier not exceeding 20 elements
+ * 
+ * constructors
+ * 
+ * Set();
+ *   PRE  -
+ *   POST - A new Set-object has been created and contains an empty set
+ * 
+ * Set (Set src);
+ *   PRE  -
+ *   POST - A new Set-object has been created and contains a copy of src
+ * 
  */
 
 void init();
 /*  PRE  - 
-*   POST - Set is empty.
-*/
-void addIdentifier (IdentifierInterface identifier1, SetInterface set1);
-/*   PRE    - Set needs to be less than 10 elements in it.
- *   POST   - Identifier added to set
- * 
- * 
- */ 
-SetInterface difference (SetInterface set1, SetInterface set2); 
- /*  PRE  -  
- *   POST - all elements contained in the 1st but not the 2nd set.
- *
- */ 
-SetInterface intersection (SetInterface set1, SetInterface set2); 
- /*  PRE  -  
- *   POST - all elements contained in both sets.
- */ 
-SetInterface union (SetInterface set1, SetInterface set2); 
- /*  PRE  -  
- *   POST - all elements of both sets. (N.B. sets do not contain duplicate elements per definition.)
- */ 
-SetInterface symmetricDifference (SetInterface set1, SetInterface set2); 
- /*  PRE  -  
- *   POST -  all elements of both sets that are not contained in the intersection.
- * 
+ *  POST - The set is empty.
  */
 
+void remove (IdentifierInterface identifier);
+/*  PRE    - The identifier must exist in the set
+    POST   - The identifier is removed from the set
+*/ 
+
+boolean contains (IdentifierInterface identifier);
+/*  PRE    - The set must be not empty
+    POST   - true:  The set does contain the identifier
+             false: The set does not contain the identifier
+*/ 
+
+int size();
+/*  PRE    - 
+    POST   - The amount of elements of the set is returned
+*/ 
+
+void addIdentifier (IdentifierInterface identifier);
+/*  PRE    - The set must contain less than 20 elements and the set doesn't contain the identifier
+    POST   - The identifier is added to the set
+*/ 
+
+SetInterface difference (SetInterface set); 
+/*  PRE  -  
+    POST - a new set that is the difference of both sets is returned
+*/ 
+
+SetInterface intersection (SetInterface set); 
+/*  PRE  -  
+    POST - a new set that is the intersection of both sets is returned
+*/ 
+
+SetInterface union (SetInterface set); 
+/*  PRE  - the union of both sets can't exceed 20 elements (Need to perform the function to check the pre-condition, wrong?)
+    POST - a new set that is the union of both sets is returned
+*/ 
+
+SetInterface symmetricDifference (SetInterface set); 
+/*  PRE  -  the symmetric difference of both sets can't exceed 20 elements (Need to perform the function to check the pre-condition, wrong?)
+    POST -  a new set that is the symmetric difference of both sets is returned
+*/
 
 }
