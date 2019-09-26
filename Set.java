@@ -1,6 +1,6 @@
 import java.util.regex.Pattern;
 
-public class Set extends Setable{
+public class Set extends SetInterface{
     
     Scanner input;
 

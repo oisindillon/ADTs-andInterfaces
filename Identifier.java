@@ -1,4 +1,4 @@
-public class Identifier extends Identifiable{
+public class Identifier extends IdentifierInterface{
 
     
 

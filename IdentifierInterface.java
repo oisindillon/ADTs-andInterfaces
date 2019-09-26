@@ -15,40 +15,39 @@ public interface IdentifierInterface{
  */
 
 IdentifierInterface addChar(char charInput);
- /*
- *  PRE -  char is alphanumeric
+/*  PRE -  char is alphanumeric
  *         first character is a letter
  *  POST - A new identifier replaces the old identifier but with another char appended to it
  */
 
 IdentifierInterface copy();
- /*
- *  PRE - 
+/*  PRE - 
  *  POST - A new identifier with the same elements
  */
+
 boolean equals(IdentifierInterface id);
- /*
- *  PRE - 
+/*  PRE - 
  *  POST - Returns true if this is equal to identifier chosen
  */
+
 void init();
- /*
- *  PRE - 
+/*  PRE - 
  *  POST - The identifier is empty
  */
+
 char atIndex(int index);
-/*
- *  PRE - identifier is not empty and index is not greater than this.size()
+/*  PRE - identifier is not empty and index is not greater than this.size()
  *  POST - gives char from desired index given
  */
+
 String getIdentifier();
-/*
- *  PRE - 
+/*  PRE - 
  *  POST - returns the whole identifier as a string
  */
+
 int size();
-/*
- *  PRE-
+/*  PRE-
  *  POST - number of elements in identifier is given
  */
+
 }
