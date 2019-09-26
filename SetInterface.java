@@ -1,6 +1,6 @@
 public interface SetInterface{
 
-    public static final int MAX_SET_LENGTH = 20; //How to deal with union when it turns out to be too big?
+public static final int MAX_SET_LENGTH = 20; 
 
 /* 
  * 
@@ -30,6 +30,11 @@ void remove (IdentifierInterface identifier);
     POST   - The identifier is not in the set 
 */ 
 
+IdentifierInterface get();
+/*  PRE    - The set is not empty
+    POST   - An element from the set is returned
+*/ 
+
 boolean contains (IdentifierInterface identifier);
 /*  PRE    - 
     POST   - true:  The set does contain the identifier
@@ -42,8 +47,9 @@ int size();
 */ 
 
 void addIdentifier (IdentifierInterface identifier);
-/*  PRE    - The set must contain less than 20 elements and the set doesn't contain the identifier
-    POST   - The identifier is added to the set
+/*  PRE    - 
+    POST   - success: The identifier is added to the set
+             failure: if the set contains 20 elements or if the set already contains the identifier, no changes are made
 */ 
 
 SetInterface difference (SetInterface set); 
@@ -57,13 +63,15 @@ SetInterface intersection (SetInterface set);
 */ 
 
 SetInterface union (SetInterface set); 
-/*  PRE  - the union of both sets can't exceed 20 elements (Need to perform the function to check the pre-condition, wrong?)
-    POST - a new set that is the union of both sets is returned
+/*  PRE  - 
+    POST - success: a new set that is the union of both sets is returned
+           failure: if the union of both sets exceeds 20 elements, an error occurs
 */ 
 
 SetInterface symmetricDifference (SetInterface set); 
-/*  PRE  -  the symmetric difference of both sets can't exceed 20 elements (Need to perform the function to check the pre-condition, wrong?)
-    POST -  a new set that is the symmetric difference of both sets is returned
+/*  PRE  -  
+    POST -  success: a new set that is the symmetric difference of both sets is returned
+            failure: the symmetric difference of both sets exceeds 20 elements, an error occurs
 */
 
 }
