@@ -1,24 +1,12 @@
 public interface IdentifierInterface{
 
-/*
- *
- * • Only alphanumeric characters are allowed as elements of an identifier.
- * • An identifier begins with a letter.
- * • Identifiers have a length of at least 1 character
- * 
- */
-
-// Write the conditions here:
-
 /* 
  * 
- * Elements: characters
+ * Elements: alphanumeric characters
  * Structure: linear
- * Domain: rows of characters
+ * Domain: array of alphanumeric characters with a length greater than 0
  * 
- * Identifier();
- *    PRE - 
- *    POST - A new Identifier-object has been created and contains an empty set
+ * Make default constructor private (has no default constructor)
  * 
  * Identifier (Identifier src);
  *   PRE- 
@@ -26,15 +14,10 @@ public interface IdentifierInterface{
  * 
  */
 
- IdentifierInterface createIdentifier(String stringIdentifier);
+IdentifierInterface addChar(char charInput);
  /*
- *  PRE - 
- *  POST - Identifer is created with correct syntax
- */
-
-IdentifierInterface addChar(Char charInput);
- /*
- *  PRE - if charInput is valid
+ *  PRE -  char is alphanumeric
+ *         first character is a letter
  *  POST - A new identifier replaces the old identifier but with another char appended to it
  */
 
@@ -55,8 +38,13 @@ void init();
  */
 char atIndex(int index);
 /*
- *  PRE - identifier is not empty and index exists
+ *  PRE - identifier is not empty and index is not greater than this.size()
  *  POST - gives char from desired index given
+ */
+String getIdentifier();
+/*
+ *  PRE - 
+ *  POST - returns the whole identifier as a string
  */
 int size();
 /*
