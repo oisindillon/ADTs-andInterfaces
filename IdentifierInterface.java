@@ -4,20 +4,20 @@ public interface IdentifierInterface{
  * 
  * Elements: alphanumeric characters
  * Structure: linear
- * Domain: array of alphanumeric characters with a length greater than 0
+ * Domain: all arrays of alphanumeric characters with a length greater than 0 and starting with a letter
  * 
- * Make default constructor private (has no default constructor)
+ * A default constructor is not allowed
  * 
- * Identifier (Identifier src);
+ * Identifier (char src);
  *   PRE- 
- *   POST- A new Identifier-object has been created and contains a copy of src
+ *   POST- src is a letter
+ *       - src isnt a letter, a placeholder is put in place
  * 
  */
 
 IdentifierInterface addChar(char charInput);
 /*  PRE -  char is alphanumeric
- *         first character is a letter
- *  POST - A new identifier replaces the old identifier but with another char appended to it
+ *  POST - c is appended
  */
 
 IdentifierInterface copy();
@@ -30,9 +30,11 @@ boolean equals(IdentifierInterface id);
  *  POST - Returns true if this is equal to identifier chosen
  */
 
-void init();
-/*  PRE - 
- *  POST - The identifier is empty
+void init(char c);
+/*  PRE -
+ *  POST - src is a letter
+ *       - src isnt a letter, a placeholder is put in place
+ * 
  */
 
 char atIndex(int index);

@@ -48,7 +48,7 @@ int size();
 
 void addIdentifier (IdentifierInterface identifier);
 /*  PRE    - 
-    POST   - success: The identifier is added to the set
+    POST   - success: The identifier is added to the set or the identifier is already in the set so the set is unaltered
              failure: if the set contains 20 elements or if the set already contains the identifier, no changes are made
 */ 
 
@@ -65,13 +65,13 @@ SetInterface intersection (SetInterface set);
 SetInterface union (SetInterface set); 
 /*  PRE  - 
     POST - success: a new set that is the union of both sets is returned
-           failure: if the union of both sets exceeds 20 elements, an error occurs
+           failure: if the union of both sets exceeds 20 elements, a "set is full" error occurs
 */ 
 
 SetInterface symmetricDifference (SetInterface set); 
 /*  PRE  -  
     POST -  success: a new set that is the symmetric difference of both sets is returned
-            failure: the symmetric difference of both sets exceeds 20 elements, an error occurs
+            failure: the symmetric difference of both sets exceeds 20 elements, a "set is full" error occurs
 */
 
 }
