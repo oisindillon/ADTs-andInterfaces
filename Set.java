@@ -1,6 +1,7 @@
+import java.util.*;
 import java.util.regex.Pattern;
 
-public class Set extends SetInterface{
+public class Set implements SetInterface{
     
     Scanner input;
 
