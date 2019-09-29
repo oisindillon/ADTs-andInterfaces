@@ -1,12 +1,8 @@
-import java.util.Scanner;
-import java.util.regex.Pattern;
-
-
 public class Set implements SetInterface {    
     Scanner input;
     char c;
 
-    Set(){
+    public Set(){
         Scanner input = new Scanner(System.in);
         input.close();
     }
