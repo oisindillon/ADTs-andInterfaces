@@ -3,40 +3,51 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Program{    
-    boolean success = false;
+   
+    void run () {
+        Scanner in = new Scanner(System.in);
+        
+        Set set1 = new Set(),
+            set2 = new Set(); 
 
-    static final int MAX_NUMBER_OF_ELEMENTS = 20;
+            getSets(in, set1, set2);
+        /*
+        while (getSets(in, set1, set2)) {
+            calculateAndGiveOutput(set1, set2);
+        }    
+        */
+    }
     
 
-    PrintStream out;
+    boolean getSets (Scanner input, Set set1, Set set2) {
+        return getSet(input, "Give first set : ", set1) && 
+               getSet(input, "Give second set : ", set2);
+    }
     
-    /*
-    boolean askSet (Scanner input, String question, Set set) {
-        do {out.printf("%s", question);
+    
+    boolean getSet (Scanner input, String question, Set set) {
+        
+        do {
+            System.out.printf(question);
             if (! input.hasNextLine()) {
-                out.printf("\n"); // otherwise line with ^D will be overwritten
+                System.out.printf("\n");
                 return false;
-                }
-            } while (! inputContainsCorrectSet(input, set));
+            }
+        } while (! validSet(input, set));         
+
         return true;
     }
-    */
-
-    boolean askBothSets (Scanner input, Set set1, Set set2) {
-        return askSet(input, "Give first set : ", set1) &&
-               askSet(input, "Give second set : ", set2);
-    }
     
-    /*
-    void start () {
-        Scanner in = new Scanner(System.in);
-        Set set1 = new Set(),
-            set2 = new Set();
-        while (askBothSets(in, set1, set2)) {
-            calculateAndGiveOutput(set1, set2);
+    boolean validSet(Scanner input, Set set) {
+        boolean valid = true;
+        //call function to check errors
+        if(valid) {
         }
+        
+        return valid; //assume it's valid
     }
-    */
-   
-      
+
+    void calculateAndGiveOutput(Set set1, Set set2) {
+        System.out.println("Finished");
+    }
 }
