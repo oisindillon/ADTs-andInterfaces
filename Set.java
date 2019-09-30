@@ -1,4 +1,7 @@
-public class Set implements SetInterface {    
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Set implements SetInterface {
     Scanner input;
     char c;
 
@@ -32,10 +35,6 @@ public class Set implements SetInterface {
         return input.hasNext(Pattern.quote(c+"{")); 
     }
 
-    boolean nextCharIsSpace(char c){
-        return input.hasNext(Pattern.quote(c+" ")); 
-    }
-
     // Method to check if the next character to be read when 
     // calling nextChar() is a digit.
     boolean nextCharIsDigit(){
@@ -47,6 +46,52 @@ public class Set implements SetInterface {
     boolean nextCharIsLetter(){ 
         return input.hasNext("[a-zA-Z]");
     }
+
+    boolean nextCharIsSpace(char c){
+        return input.hasNext(Pattern.quote(c+" ")); 
+    }
+
+    String errorCheck(){
+        if(!nextCharIsOpen(c)){
+            return "You have to open the set with '{' ";
+        }
+        int i=0;
+        while(i<20){
+            identErrorCheck();
+            i++;
+        }
+        if(i>20){
+            return "There are too many elements in your set";
+        }
+        if(!nextCharIsClose(c)){
+            return "You have to close the set with '}' ";
+        }
+    }
+
+    String identErrorCheck(){
+        if(!nextCharIsLetter()){
+            return "First letter has to be from the alphabet";
+            //init identifier
+        }
+        else{
+            boolean end = false;
+            while(end == false){
+                if(!nextCharIsDigit() && !nextCharIsLetter()){
+                    return "All characters in Identifiers have to be alphanumeric";
+                }
+                if(nextCharIsSpace(c)){
+                    end = true;
+                    return null;
+                    //change identifier to character
+                }
+                else{
+                    //save specified character to an identifier
+                }
+            }
+        }
+        return null;
+    }
+
 
 	public void init() {
 		// TODO Auto-generated method stub
