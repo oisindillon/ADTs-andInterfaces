@@ -1,4 +1,6 @@
-public class Identifier implements IdentifierInterface{
+import java.util.regex.Pattern;
+
+public class Identifier implements IdentifierInterface {
 
     
     public IdentifierInterface addChar(char charInput) {
@@ -39,6 +41,7 @@ public class Identifier implements IdentifierInterface{
         // TODO Auto-generated method stub
         return 0;
     }
+
 
     
 
