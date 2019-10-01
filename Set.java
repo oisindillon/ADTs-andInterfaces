@@ -66,6 +66,8 @@ public class Set implements SetInterface {
         if(!nextCharIsClose(c)){
             return "You have to close the set with '}' ";
         }
+
+        return "";
     }
 
     String identErrorCheck(){

@@ -1,21 +1,18 @@
-import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Program{    
-   
+
     void run () {
         Scanner in = new Scanner(System.in);
         
         Set set1 = new Set(),
             set2 = new Set(); 
 
-            getSets(in, set1, set2);
-        /*
+        
         while (getSets(in, set1, set2)) {
             calculateAndGiveOutput(set1, set2);
-        }    
-        */
+        }  
+
     }
     
 
@@ -26,16 +23,43 @@ public class Program{
     
     
     boolean getSet (Scanner input, String question, Set set) {
-        
+        String setToValidate;
+
+        System.out.printf(question);
         do {
-            System.out.printf(question);
-            if (! input.hasNextLine()) {
-                System.out.printf("\n");
+            input.nextLine();
+            if (input.hasNext()) {
+                setToValidate = input.next();
+                System.out.printf("Set: " + setToValidate);
+            } else {
+                System.out.printf("No input given.\n");
+            }
+        } while (! input.hasNext());
+        
+
+        /*
+        do {
+            
+
+            if (input.hasNext()) {
+                
+            } else {
+                System.out.printf("has no next\n");
                 return false;
             }
         } while (! validSet(input, set));         
 
+        */
+
         return true;
+    }
+
+    
+    static String function(Scanner in) {
+        
+        System.out.print("Input: ");
+        String setToValidate = in.next();
+        return setToValidate;
     }
     
     boolean validSet(Scanner input, Set set) {
