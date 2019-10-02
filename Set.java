@@ -10,16 +10,6 @@ public class Set implements SetInterface {
         input.close();
     }
 
-    /*
-    Exception errorCheck(){
-       try{
-        nextCharIsOpen(c);
-       }catch(Exception e){
-           System.out.println("Missing "+"{"+" to open a set");
-       }
-    }
-    */
-
     // Method to read 1 character. 
     char nextChar (int index){
         return input.next().charAt(index);
@@ -55,6 +45,7 @@ public class Set implements SetInterface {
         if(!nextCharIsOpen(c)){
             return "You have to open the set with '{' ";
         }
+        //init set
         int i=0;
         while(i<20){
             identErrorCheck();
@@ -66,12 +57,15 @@ public class Set implements SetInterface {
         if(!nextCharIsClose(c)){
             return "You have to close the set with '}' ";
         }
+        //return set
     }
 
     String identErrorCheck(){
         if(!nextCharIsLetter()){
-            return "First letter has to be from the alphabet";
-            //init identifier
+            return "First character of each element has to be from the alphabet";
+            //init identifier and add character to identifier
+            
+
         }
         else{
             boolean end = false;
@@ -82,7 +76,8 @@ public class Set implements SetInterface {
                 if(nextCharIsSpace(c)){
                     end = true;
                     return null;
-                    //change identifier to character
+                    //stop characters saving to identifier and leave identifier
+
                 }
                 else{
                     //save specified character to an identifier
