@@ -43,18 +43,18 @@ public class Set implements SetInterface {
 
     String errorCheck(){
         if(!nextCharIsOpen(c)){
-            return "You have to open the set with '{' ";
+            return "You have to open the set with '{' ";        //error checks the first opening of the set
         }
         //init set
         int i=0;
         while(i<20){
-            identErrorCheck();
+            identErrorCheck();              //error checks up to 20 identifiers
             i++;
         }
         if(i>20){
-            return "There are too many elements in your set";
+            return "There are too many elements in your set";   //makes sure correct number of identifiers are allowed in set
         }
-        if(!nextCharIsClose(c)){
+        if(!nextCharIsClose(c)){                            //error checks set closing
             return "You have to close the set with '}' ";
         }
         //return set
@@ -62,18 +62,17 @@ public class Set implements SetInterface {
 
     String identErrorCheck(){
         if(!nextCharIsLetter()){
-            return "First character of each element has to be from the alphabet";
+            return "First character of each element has to be from the alphabet";       //checks first letter of identifer
             //init identifier and add character to identifier
             
-
         }
-        else{
+        else{                                           //checks the following identifier characters
             boolean end = false;
             while(end == false){
                 if(!nextCharIsDigit() && !nextCharIsLetter()){
                     return "All characters in Identifiers have to be alphanumeric";
                 }
-                if(nextCharIsSpace(c)){
+                if(nextCharIsSpace(c)){                                 //ends identifier and starts new one
                     end = true;
                     return null;
                     //stop characters saving to identifier and leave identifier
