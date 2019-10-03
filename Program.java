@@ -1,44 +1,46 @@
-import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Program{    
-   
+
     void run () {
         Scanner in = new Scanner(System.in);
-        
-        Set set1 = new Set(),
-            set2 = new Set(); 
 
-            getSets(in, set1, set2);
-        /*
-        while (getSets(in, set1, set2)) {
-            calculateAndGiveOutput(set1, set2);
-        }    
-        */
+        String input1 = "";
+        String input2 = "";
+
+        
+        while (getSets(in, input1, input2)) {
+            //calculateAndGiveOutput(set1, set2);
+            System.out.println("Inputs are correct.");
+        }  
+
     }
     
 
-    boolean getSets (Scanner input, Set set1, Set set2) {
-        return getSet(input, "Give first set : ", set1) && 
-               getSet(input, "Give second set : ", set2);
+    boolean getSets (Scanner input, String input1, String input2) {
+        return getSet(input, "Give first set : ", input1) && 
+               getSet(input, "Give second set : ", input2);
     }
     
     
-    boolean getSet (Scanner input, String question, Set set) {
-        
+    boolean getSet (Scanner in, String question, String input) {
+        String setToValidate = "";
+
         do {
             System.out.printf(question);
-            if (! input.hasNextLine()) {
-                System.out.printf("\n");
+            if (in.hasNextLine()) {
+                setToValidate = in.nextLine();
+            } else {
+                System.out.println("\n");
                 return false;
             }
-        } while (! validSet(input, set));         
-
+        } while (! validSet(in, setToValidate));         
+     
+        
         return true;
     }
     
-    boolean validSet(Scanner input, Set set) {
+    boolean validSet(Scanner input, String setToValidate) {
         boolean valid = true;
         //call function to check errors
         if(valid) {
