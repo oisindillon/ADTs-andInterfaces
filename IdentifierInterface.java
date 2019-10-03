@@ -11,7 +11,7 @@ public interface IdentifierInterface{
  * Identifier (char src);
  *   PRE- 
  *   POST- src is a letter
- *       - src isnt a letter, a placeholder is put in place
+ *       - if src is not letter, the method fails with an exception
  * 
  */
 
@@ -33,7 +33,7 @@ boolean equals(IdentifierInterface id);
 void init(char c);
 /*  PRE -
  *  POST - src is a letter
- *       - src isnt a letter, a placeholder is put in place
+ *       - if src is not letter, the method fails with an exception
  * 
  */
 

@@ -2,12 +2,11 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Set implements SetInterface {
-    Scanner input;
-    char c;
+
+    private Identifier[] elements;
 
     public Set(){
-        Scanner input = new Scanner(System.in);
-        input.close();
+        
     }
 
     // Method to read 1 character. 
@@ -57,7 +56,8 @@ public class Set implements SetInterface {
         if(!nextCharIsClose(c)){                            //error checks set closing
             return "You have to close the set with '}' ";
         }
-        //return set
+        
+        return "";
     }
 
     String identErrorCheck(){

@@ -32,7 +32,7 @@ void remove (IdentifierInterface identifier);
 
 IdentifierInterface get();
 /*  PRE    - The set is not empty
-    POST   - An element from the set is returned
+    POST   - An element from the set is returned, null otherwise
 */ 
 
 boolean contains (IdentifierInterface identifier);
@@ -48,8 +48,8 @@ int size();
 
 void addIdentifier (IdentifierInterface identifier);
 /*  PRE    - 
-    POST   - success: The identifier is added to the set or the identifier is already in the set so the set is unaltered
-             failure: if the set contains 20 elements or if the set already contains the identifier, no changes are made
+    POST   - success: identifier is in the set
+             failure: if size of set @pre is 20 and identifier not in set @pre, then no changes, set @pre == set @post
 */ 
 
 SetInterface difference (SetInterface set); 
