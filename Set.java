@@ -5,8 +5,11 @@ public class Set implements SetInterface {
 
     private Identifier[] elements;
 
+    
+    Scanner input;
+    char c;
+
     public Set(){
-        
     }
 
     // Method to read 1 character. 

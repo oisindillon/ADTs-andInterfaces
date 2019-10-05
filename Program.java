@@ -1,49 +1,110 @@
 import java.util.Scanner;
 
-public class Program{    
+public class Program{ 
+    Scanner input = new Scanner("{a } b c}"); 
 
-    void run () {
-        Scanner in = new Scanner(System.in);
-
-        String input1 = "";
-        String input2 = "";
-
+    void run () {        
         
-        while (getSets(in, input1, input2)) {
+
+        Set set1 = new Set(),
+            set2 = new Set();
+
+
+        // Testing:
+        getSet(input, "Give set: ", set1);
+
+
+
+        /*
+        while (getSets(input, set1, set2)) {
             //calculateAndGiveOutput(set1, set2);
             System.out.println("Inputs are correct.");
         }  
+        */
 
     }
     
 
-    boolean getSets (Scanner input, String input1, String input2) {
-        return getSet(input, "Give first set : ", input1) && 
-               getSet(input, "Give second set : ", input2);
+    boolean getSets (Scanner input, Set set1, Set set2) {
+        return getSet(input, "Give first set : ", set1) && 
+               getSet(input, "Give second set : ", set2);
     }
     
     
-    boolean getSet (Scanner in, String question, String input) {
-        String setToValidate = "";
+    void isOpen (Scanner input) throws Exception {
+        if (! input.hasNext("\\{")) {
+            throw new Exception("Error");
+        } else {
+            System.out.println("Char is {");
+        }   
+        input.next();
+    }
+    void isClose (Scanner input) throws Exception {
+        if (! input.hasNext("\\}")) {
+            throw new Exception("Error");
+        } else {
+            System.out.println("Char is }");
+        }   
+        input.next();
+    }
+    void isLetter (Scanner input) throws Exception {
+        if (! input.hasNext("[a-z]")) {
+            throw new Exception("Error");
+        } else {
+            System.out.println("Char is a letter");
+        }
+        input.next();
+    }
+    void isSpace (Scanner input) throws Exception {
+        if (! input.hasNext(" ")) {
+            throw new Exception("Error");
+        } else {
+            System.out.println("Char is a space");
+        }
+        input.next();
+    }
+    
+    void next (Scanner input) {
+        System.out.println("this.input.next(): " + this.input.next());
+    }
+    
+    boolean getSet (Scanner input, String question, Set set) {
 
+        input.useDelimiter("");
+        String character = "{";
+        //System.out.printf(question);
+        try{  
+            isOpen(input);
+            isLetter(input);
+            isSpace(input);
+            isClose(input);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        
+
+        /*
         do {
-            System.out.printf(question);
-            if (in.hasNextLine()) {
-                setToValidate = in.nextLine();
-            } else {
-                System.out.println("\n");
+            System.out.printf("%s", question);
+            
+            if (! input.hasNextLine()) {
+                System.out.printf("\n"); 
                 return false;
             }
-        } while (! validSet(in, setToValidate));         
-     
+        } while (! validSet(input, set));
+        */
+
         
+
         return true;
     }
     
-    boolean validSet(Scanner input, String setToValidate) {
+    boolean validSet(Scanner input, Set setToValidate) {
         boolean valid = true;
         //call function to check errors
         if(valid) {
+            System.out.println("Input is: " + input);
         }
         
         return valid; //assume it's valid
