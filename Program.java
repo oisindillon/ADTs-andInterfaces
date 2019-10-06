@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Program{ 
-    Scanner input = new Scanner("{afew }"); 
+    Scanner input = new Scanner("{af ahwd dwaj}"); 
 
     void run () {        
         
@@ -48,23 +48,21 @@ public class Program{
         input.next();
         return true;
     }
-    boolean isLetter (Scanner input) throws Exception {
+    String isLetter (Scanner input) throws Exception {
         if (! input.hasNext("[a-zA-Z]")) {
             throw new Exception("Error");
         } else {
             System.out.println("Char is a letter");
         }
-        input.next();
-        return true;
+        return input.next();
     }
-    boolean isAlphanumeric (Scanner input) throws Exception {
+    String isAlphanumeric (Scanner input) throws Exception {
         if (! input.hasNext("[a-zA-Z0-9]")) {
             throw new Exception("Error");
         } else {
             System.out.println("Char is a letter/digit");
         }
-        input.next();
-        return true;
+        return input.next();
     }
     boolean isSpace (Scanner input) throws Exception {
         if (! input.hasNext(" ")) {
@@ -84,10 +82,10 @@ public class Program{
         String result = new String();
 
         try {
-            isLetter(input);
+            result += isLetter(input);
 
             while (input.hasNext("[a-zA-Z0-9]")) {
-                isAlphanumeric(input);
+                result += isAlphanumeric(input);
             }
         
          } catch (Exception e) {
@@ -96,18 +94,24 @@ public class Program{
 
         return result;
     }
-    /*
-    Student student (Scanner input) throws APException {
-        Student result = new Student();
-     
-        result.putstudentnumber(studentnumber(input));
-        character(input, ';');
-        result.putData(data(input));
-        character(input, ';');
-     
+    String identifiersRow (Scanner input) {
+        String result = new String();
+ 
+        result += (identifier(input));
+    
+        while (input.hasNext(" ")) {
+            try {
+                isSpace(input);
+                result += " " + (identifier(input));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+   
+            
+        }
+    
         return result;
     }
-    */
      
     boolean getSet (Scanner input, String question, Set set) {
 
@@ -116,8 +120,7 @@ public class Program{
         //System.out.printf(question);
         try{  
             isOpen(input);
-            newIdentifier = identifier(input);
-            isSpace(input);
+            newIdentifier = identifiersRow(input);
             isClose(input);
         } catch (Exception e) {
             System.out.println(e);
