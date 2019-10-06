@@ -1,8 +1,10 @@
 import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class Identifier implements IdentifierInterface {
 
-    
+    String element;
+
     public IdentifierInterface addChar(char charInput) {
         // TODO Auto-generated method stub
         return null;
@@ -33,8 +35,7 @@ public class Identifier implements IdentifierInterface {
     }
 
     public String getIdentifier() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.element;
     }
 
     public int size() {
@@ -42,7 +43,28 @@ public class Identifier implements IdentifierInterface {
         return 0;
     }
 
+    public void set(String content) {
+        this.element = content;
+    }
 
-    
+    public String get() {
+        return this.element;
+    }
 
+    public static String identifier (Scanner input) {
+        String result = new String();
+
+        try {
+            result += Set.isLetter(input);
+
+            while (input.hasNext("[a-zA-Z0-9]")) {
+                result += Set.isAlphanumeric(input);
+            }
+        
+         } catch (Exception e) {
+            System.out.println(e);
+         }
+
+        return result;
+    }
 }

@@ -1,26 +1,20 @@
 import java.util.Scanner;
 
 public class Program{ 
-    Scanner input = new Scanner("{af ahwd dwaj}"); 
+    
 
     void run () {        
         
+        Scanner input = new Scanner(System.in); 
 
         Set set1 = new Set(),
             set2 = new Set();
 
-
-        // Testing:
-        getSet(input, "Give set: ", set1);
-
-
-
-        /*
         while (getSets(input, set1, set2)) {
             //calculateAndGiveOutput(set1, set2);
             System.out.println("Inputs are correct.");
         }  
-        */
+        
 
     }
     
@@ -30,70 +24,19 @@ public class Program{
                getSet(input, "Give second set : ", set2);
     }
     
-    
-    void isOpen (Scanner input) throws Exception {
-        if (! input.hasNext("\\{")) {
-            throw new Exception("Error");
-        } else {
-            System.out.println("Char is {");
-        }   
-        input.next();
-    }
-    boolean isClose (Scanner input) throws Exception {
-        if (! input.hasNext("\\}")) {
-            throw new Exception("Error");
-        } else {
-            System.out.println("Char is }");
-        }   
-        input.next();
-        return true;
-    }
-    String isLetter (Scanner input) throws Exception {
-        if (! input.hasNext("[a-zA-Z]")) {
-            throw new Exception("Error");
-        } else {
-            System.out.println("Char is a letter");
-        }
-        return input.next();
-    }
-    String isAlphanumeric (Scanner input) throws Exception {
-        if (! input.hasNext("[a-zA-Z0-9]")) {
-            throw new Exception("Error");
-        } else {
-            System.out.println("Char is a letter/digit");
-        }
-        return input.next();
-    }
-    boolean isSpace (Scanner input) throws Exception {
-        if (! input.hasNext(" ")) {
-            throw new Exception("Error");
-        } else {
-            System.out.println("Char is a space");
-        }
-        input.next();
-        return true;
-    }
+    /*
     void eoln (Scanner input) throws Exception {
         if (input.hasNext()) {
-            throw new Exception("Error");
+            System.out.println("Next is: " + input.next());
+            throw new Exception("Error: hasNext");
+        } else {
+            System.out.println("End of line");
         }
     }
-    String identifier (Scanner input) {
-        String result = new String();
+    */
 
-        try {
-            result += isLetter(input);
 
-            while (input.hasNext("[a-zA-Z0-9]")) {
-                result += isAlphanumeric(input);
-            }
-        
-         } catch (Exception e) {
-             System.out.println(e);
-         }
-
-        return result;
-    }
+    /*
     String identifiersRow (Scanner input) {
         String result = new String();
  
@@ -112,21 +55,23 @@ public class Program{
     
         return result;
     }
+    */
      
     boolean getSet (Scanner input, String question, Set set) {
 
         input.useDelimiter("");
-        String newIdentifier = "";
-        //System.out.printf(question);
+        Identifier identifier = new Identifier();
+        System.out.printf(question);
         try{  
-            isOpen(input);
-            newIdentifier = identifiersRow(input);
-            isClose(input);
+            Set.isOpen(input);
+            identifier.set(Identifier.identifier(input));
+            Set.isClose(input);
+            System.out.println(identifier.element);
         } catch (Exception e) {
             System.out.println(e);
         }
         
-        System.out.println("Identifier: " + newIdentifier);
+
 
         /*
         do {
@@ -138,9 +83,7 @@ public class Program{
             }
         } while (! validSet(input, set));
         */
-
-        
-
+        input.nextLine();
         return true;
     }
     

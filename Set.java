@@ -3,7 +3,8 @@ import java.util.regex.Pattern;
 
 public class Set implements SetInterface {
 
-    private Identifier[] elements;
+    IdentifierInterface[] elements;
+    IdentifierInterface test;
 
     
     Scanner input;
@@ -37,6 +38,44 @@ public class Set implements SetInterface {
     // calling nextChar() is a letter.
     boolean nextCharIsLetter(){ 
         return input.hasNext("[a-zA-Z]");
+    }
+
+    public static String isLetter (Scanner input) throws Exception {
+        if (! input.hasNext("[a-zA-Z]")) {
+            throw new Exception("Error: letter");
+        } 
+        return input.next();
+    }
+
+    public static boolean isSpace (Scanner input) throws Exception {
+        if (! input.hasNext(" ")) {
+            throw new Exception("Error: space");
+        } 
+        input.next();
+        return true;
+    }
+
+    public static String isAlphanumeric (Scanner input) throws Exception {
+        if (! input.hasNext("[a-zA-Z0-9]")) {
+            throw new Exception("Error: alphanumeric");
+        } 
+        return input.next();
+    }
+
+    public static boolean isClose (Scanner input) throws Exception {
+        if (! input.hasNext("\\}")) {
+            throw new Exception("Error: isClose");
+        } 
+        input.next();
+        return true;
+    }
+    
+    public static boolean isOpen (Scanner input) throws Exception {
+        if (! input.hasNext("\\{")) {
+            throw new Exception("Error: isOpen");
+        } 
+        input.next();
+        return true;
     }
 
     boolean nextCharIsSpace(char c){
@@ -115,10 +154,14 @@ public class Set implements SetInterface {
 		return 0;
 	}
 
-	public void addIdentifier(IdentifierInterface identifier) {
-		// TODO Auto-generated method stub
-		
+	public void addIdentifier(IdentifierInterface identifier) { 
+        this.test = identifier;
+    }
+
+    public String getElement() {
+        return "Set: {" + this.test.getIdentifier() + "}";
 	}
+    
 
 	public SetInterface difference(SetInterface set) {
 		// TODO Auto-generated method stub
