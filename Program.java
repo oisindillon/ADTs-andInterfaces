@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Program{ 
-    Scanner input = new Scanner("{a } b c}"); 
+    Scanner input = new Scanner("{afew }"); 
 
     void run () {        
         
@@ -39,50 +39,91 @@ public class Program{
         }   
         input.next();
     }
-    void isClose (Scanner input) throws Exception {
+    boolean isClose (Scanner input) throws Exception {
         if (! input.hasNext("\\}")) {
             throw new Exception("Error");
         } else {
             System.out.println("Char is }");
         }   
         input.next();
+        return true;
     }
-    void isLetter (Scanner input) throws Exception {
-        if (! input.hasNext("[a-z]")) {
+    boolean isLetter (Scanner input) throws Exception {
+        if (! input.hasNext("[a-zA-Z]")) {
             throw new Exception("Error");
         } else {
             System.out.println("Char is a letter");
         }
         input.next();
+        return true;
     }
-    void isSpace (Scanner input) throws Exception {
+    boolean isAlphanumeric (Scanner input) throws Exception {
+        if (! input.hasNext("[a-zA-Z0-9]")) {
+            throw new Exception("Error");
+        } else {
+            System.out.println("Char is a letter/digit");
+        }
+        input.next();
+        return true;
+    }
+    boolean isSpace (Scanner input) throws Exception {
         if (! input.hasNext(" ")) {
             throw new Exception("Error");
         } else {
             System.out.println("Char is a space");
         }
         input.next();
+        return true;
     }
-    
-    void next (Scanner input) {
-        System.out.println("this.input.next(): " + this.input.next());
+    void eoln (Scanner input) throws Exception {
+        if (input.hasNext()) {
+            throw new Exception("Error");
+        }
     }
-    
+    String identifier (Scanner input) {
+        String result = new String();
+
+        try {
+            isLetter(input);
+
+            while (input.hasNext("[a-zA-Z0-9]")) {
+                isAlphanumeric(input);
+            }
+        
+         } catch (Exception e) {
+             System.out.println(e);
+         }
+
+        return result;
+    }
+    /*
+    Student student (Scanner input) throws APException {
+        Student result = new Student();
+     
+        result.putstudentnumber(studentnumber(input));
+        character(input, ';');
+        result.putData(data(input));
+        character(input, ';');
+     
+        return result;
+    }
+    */
+     
     boolean getSet (Scanner input, String question, Set set) {
 
         input.useDelimiter("");
-        String character = "{";
+        String newIdentifier = "";
         //System.out.printf(question);
         try{  
             isOpen(input);
-            isLetter(input);
+            newIdentifier = identifier(input);
             isSpace(input);
             isClose(input);
         } catch (Exception e) {
             System.out.println(e);
         }
         
-        
+        System.out.println("Identifier: " + newIdentifier);
 
         /*
         do {
