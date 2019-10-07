@@ -3,17 +3,30 @@ import java.util.Scanner;
 
 public class Identifier implements IdentifierInterface {
 
-    String element;
+    String content;
 
-    public IdentifierInterface addChar(char charInput) {
-        // TODO Auto-generated method stub
-        return null;
+    public void addChar(char c) {
+        String character = "";
+        character = character.valueOf(c);
+        Scanner scanner = new Scanner(character);
+
+        if (content != null && Syntax.nextCharIsAlphanumeric(scanner)) {
+            this.content += c;
+        } 
     }
 
+    public void init(char c) throws Exception {
+        if (! Character.isLetter(c)) {
+            throw new Exception("Syntax error: An identifier must start with a letter.");
+        } 
+
+        this.content = content.valueOf(c);
+    }
     
     public IdentifierInterface copy() {
-        // TODO Auto-generated method stub
-        return null;
+        Identifier copyIdentifier = new Identifier();
+        copyIdentifier.content = this.content;
+        return copyIdentifier;
     }
 
     
@@ -22,49 +35,56 @@ public class Identifier implements IdentifierInterface {
         return false;
     }
 
-    
-    public void init(char c) {
-        // TODO Auto-generated method stub
 
-    }
-
-    
     public char atIndex(int index) {
-        // TODO Auto-generated method stub
-        return 0;
+        if (index > this.content.length() && content != null) {
+            return 'd';
+        }
+  
+        char c = this.content.charAt(index);
+        return c;
     }
 
     public String getIdentifier() {
-        return this.element;
+        return this.content;
     }
 
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    public void set(String content) {
-        this.element = content;
+        return this.content.length();
     }
 
     public String get() {
-        return this.element;
+        if (content == null) {
+            return null;
+        }
+        return this.content;
     }
 
-    public static String identifier (Scanner input) {
-        String result = new String();
+    public void set(String content) {
+        this.content = content;
+    }
+
+    public boolean identifier (Scanner input) throws Exception {
+        
+        char c;
 
         try {
-            result += Set.isLetter(input);
 
-            while (input.hasNext("[a-zA-Z0-9]")) {
-                result += Set.isAlphanumeric(input);
-            }
+            c = Syntax.getContent(input);
+            init(c);
+            
+            while (Syntax.nextCharIsAlphanumeric(input)) {
+                c = Syntax.getContent(input);
+                System.out.print(c + " is alphanumeric");
+                addChar(c);
+            }          
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        System.out.println(get());
+        return true;
         
-         } catch (Exception e) {
-            System.out.println(e);
-         }
-
-        return result;
     }
 }

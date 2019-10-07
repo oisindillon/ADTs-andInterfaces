@@ -13,123 +13,9 @@ public class Set implements SetInterface {
     public Set(){
     }
 
-    // Method to read 1 character. 
-    char nextChar (int index){
-        return input.next().charAt(index);
-    }
+    // INTEFACE METHODS
 
-    // Method to check if the next character to be read when
-    // calling nextChar() is equal to the provided character.
-    boolean nextCharIsClose(char c){
-        return input.hasNext(Pattern.quote(c+"}")); 
-    }
-
-    boolean nextCharIsOpen(char c){
-        return input.hasNext(Pattern.quote(c+"{")); 
-    }
-
-    // Method to check if the next character to be read when 
-    // calling nextChar() is a digit.
-    boolean nextCharIsDigit(){
-        return input.hasNext("[0-9]");
-    }
-
-    // Method to check if the next character to be read when 
-    // calling nextChar() is a letter.
-    boolean nextCharIsLetter(){ 
-        return input.hasNext("[a-zA-Z]");
-    }
-
-    public static String isLetter (Scanner input) throws Exception {
-        if (! input.hasNext("[a-zA-Z]")) {
-            throw new Exception("Error: letter");
-        } 
-        return input.next();
-    }
-
-    public static boolean isSpace (Scanner input) throws Exception {
-        if (! input.hasNext(" ")) {
-            throw new Exception("Error: space");
-        } 
-        input.next();
-        return true;
-    }
-
-    public static String isAlphanumeric (Scanner input) throws Exception {
-        if (! input.hasNext("[a-zA-Z0-9]")) {
-            throw new Exception("Error: alphanumeric");
-        } 
-        return input.next();
-    }
-
-    public static boolean isClose (Scanner input) throws Exception {
-        if (! input.hasNext("\\}")) {
-            throw new Exception("Error: isClose");
-        } 
-        input.next();
-        return true;
-    }
-    
-    public static boolean isOpen (Scanner input) throws Exception {
-        if (! input.hasNext("\\{")) {
-            throw new Exception("Error: isOpen");
-        } 
-        input.next();
-        return true;
-    }
-
-    boolean nextCharIsSpace(char c){
-        return input.hasNext(Pattern.quote(c+" ")); 
-    }
-
-    String errorCheck(){
-        if(!nextCharIsOpen(c)){
-            return "You have to open the set with '{' ";        //error checks the first opening of the set
-        }
-        //init set
-        int i=0;
-        while(i<20){
-            identErrorCheck();              //error checks up to 20 identifiers
-            i++;
-        }
-        if(i>20){
-            return "There are too many elements in your set";   //makes sure correct number of identifiers are allowed in set
-        }
-        if(!nextCharIsClose(c)){                            //error checks set closing
-            return "You have to close the set with '}' ";
-        }
-        
-        return "";
-    }
-
-    String identErrorCheck(){
-        if(!nextCharIsLetter()){
-            return "First character of each element has to be from the alphabet";       //checks first letter of identifer
-            //init identifier and add character to identifier
-            
-        }
-        else{                                           //checks the following identifier characters
-            boolean end = false;
-            while(end == false){
-                if(!nextCharIsDigit() && !nextCharIsLetter()){
-                    return "All characters in Identifiers have to be alphanumeric";
-                }
-                if(nextCharIsSpace(c)){                                 //ends identifier and starts new one
-                    end = true;
-                    return null;
-                    //stop characters saving to identifier and leave identifier
-
-                }
-                else{
-                    //save specified character to an identifier
-                }
-            }
-        }
-        return null;
-    }
-
-
-	public void init() {
+    public void init() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -181,7 +67,64 @@ public class Set implements SetInterface {
 	public SetInterface symmetricDifference(SetInterface set) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+    }
+    
+
+
+
+
+    String errorCheck(){
+        /*
+        if(!nextCharIsOpen(c)){
+            return "You have to open the set with '{' ";        //error checks the first opening of the set
+        }
+        //init set
+        int i=0;
+        while(i<20){
+            identErrorCheck();              //error checks up to 20 identifiers
+            i++;
+        }
+        if(i>20){
+            return "There are too many elements in your set";   //makes sure correct number of identifiers are allowed in set
+        }
+        if(!nextCharIsClose(c)){                            //error checks set closing
+            return "You have to close the set with '}' ";
+        }
+        */
+        return "";
+    }
+
+    String identErrorCheck(){
+        /*
+        if(!nextCharIsLetter()){
+            return "First character of each element has to be from the alphabet";       //checks first letter of identifer
+            //init identifier and add character to identifier
+            
+        }
+        else{                                           //checks the following identifier characters
+            boolean end = false;
+            while(end == false){
+                if(!nextCharIsDigit() && !nextCharIsLetter()){
+                    return "All characters in Identifiers have to be alphanumeric";
+                }
+                if(nextCharIsSpace(c)){                                 //ends identifier and starts new one
+                    end = true;
+                    return null;
+                    //stop characters saving to identifier and leave identifier
+
+                }
+                else{
+                    //save specified character to an identifier
+                }
+            }
+        }
+        */
+        return null;
+        
+    }
+
+
+
 
     
 }

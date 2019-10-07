@@ -15,7 +15,7 @@ public interface IdentifierInterface{
  * 
  */
 
-IdentifierInterface addChar(char charInput);
+void addChar(char c);
 /*  PRE -  char is alphanumeric
  *  POST - c is appended
  */
@@ -30,7 +30,7 @@ boolean equals(IdentifierInterface id);
  *  POST - Returns true if this is equal to identifier chosen
  */
 
-void init(char c);
+void init(char c) throws Exception;
 /*  PRE -
  *  POST - src is a letter
  *       - if src is not letter, the method fails with an exception

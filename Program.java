@@ -37,15 +37,18 @@ public class Program{
 
 
     /*
-    String identifiersRow (Scanner input) {
-        String result = new String();
+    Identifier[] identifiersRow (Scanner input) {
+        
+        Identifier[] result = new Identifier[20];
+        int count = 0;
  
-        result += (identifier(input));
+        result[count] = (Identifier.identifier(input));
     
         while (input.hasNext(" ")) {
             try {
-                isSpace(input);
-                result += " " + (identifier(input));
+                Syntax.isSpace(input);
+                count++;
+                result[count] = (Identifier.identifier(input));
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -54,22 +57,33 @@ public class Program{
         }
     
         return result;
+       
     }
     */
+   
      
     boolean getSet (Scanner input, String question, Set set) {
 
+        
         input.useDelimiter("");
-        Identifier identifier = new Identifier();
+        Identifier identifierr = new Identifier();
         System.out.printf(question);
         try{  
-            Set.isOpen(input);
-            identifier.set(Identifier.identifier(input));
-            Set.isClose(input);
-            System.out.println(identifier.element);
+            Syntax.isOpen(input);
+            identifierr.identifier(input);
+            
+            //set.elements = identifiersRow(input);
+
+            //identifier.set(Identifier.identifier(input));
+            
+            Syntax.isClose(input);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
+            return false;
         }
+
+        input.nextLine();
+        return true;
         
 
 
@@ -83,8 +97,7 @@ public class Program{
             }
         } while (! validSet(input, set));
         */
-        input.nextLine();
-        return true;
+        
     }
     
     boolean validSet(Scanner input, Set setToValidate) {
