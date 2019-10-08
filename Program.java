@@ -11,8 +11,7 @@ public class Program{
             set2 = new Set();
 
         while (getSets(input, set1, set2)) {
-            //calculateAndGiveOutput(set1, set2);
-            System.out.println("Inputs are correct.");
+            calculate(set1, set2);
         }  
         
 
@@ -52,6 +51,7 @@ public class Program{
 
                 // add the identifier to the set
                 set.addIdentifier(identifier);
+                
             }
             
             // check if set terminates with '}'
@@ -63,8 +63,6 @@ public class Program{
             return false;
         }
 
-        set.outputSet();
-        System.out.println(set.size());
         input.nextLine();
         return true;
         
@@ -93,7 +91,10 @@ public class Program{
         return valid; //assume it's valid
     }
 
-    void calculateAndGiveOutput(Set set1, Set set2) {
-        System.out.println("Finished");
+    void calculate(Set set1, Set set2) {
+        System.out.println("difference = " + set1.difference(set2).printSet());
+        System.out.println("intersection = " + set1.intersection(set2).printSet());
+        System.out.println("union = " + set1.union(set2).printSet());
+        System.out.println("sym. diff. = " + set1.symmetricDifference(set2).printSet());
     }
 }

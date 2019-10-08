@@ -42,9 +42,9 @@ char atIndex(int index);
  *  POST - gives char from desired index given
  */
 
-String getIdentifier();
+String getContent();
 /*  PRE - 
- *  POST - returns the whole identifier as a string
+ *  POST - returns the content of the identifier as a String
  */
 
 int size();

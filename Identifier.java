@@ -35,7 +35,7 @@ public class Identifier implements IdentifierInterface {
 
     
     public boolean equals(IdentifierInterface id) {
-        if (this.content.equals(id.getIdentifier())) {
+        if (this.content.equals(id.getContent())) {
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ public class Identifier implements IdentifierInterface {
         return c;
     }
 
-    public String getIdentifier() {
+    public String getContent() {
         if (content == null) {
             return null;
         }

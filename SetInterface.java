@@ -52,23 +52,23 @@ void addIdentifier (IdentifierInterface identifier);
              failure: if size of set @pre is 20 and identifier not in set @pre, then no changes, set @pre == set @post
 */ 
 
-SetInterface difference (SetInterface set); 
+Set difference (Set set); 
 /*  PRE  -  
     POST - a new set that is the difference of both sets is returned
 */ 
 
-SetInterface intersection (SetInterface set); 
+Set intersection (Set set); 
 /*  PRE  -  
     POST - a new set that is the intersection of both sets is returned
 */ 
 
-SetInterface union (SetInterface set); 
+Set union (Set set); 
 /*  PRE  - 
     POST - success: a new set that is the union of both sets is returned
            failure: if the union of both sets exceeds 20 elements, a "set is full" error occurs
 */ 
 
-SetInterface symmetricDifference (SetInterface set); 
+Set symmetricDifference (Set set); 
 /*  PRE  -  
     POST -  success: a new set that is the symmetric difference of both sets is returned
             failure: the symmetric difference of both sets exceeds 20 elements, a "set is full" error occurs

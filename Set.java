@@ -2,73 +2,133 @@ import java.util.*;
 
 public class Set implements SetInterface {
 
-	LinkedList<IdentifierInterface> identifiers = new LinkedList<IdentifierInterface>();
+	private LinkedList<IdentifierInterface> elements = new LinkedList<IdentifierInterface>();
 
-    IdentifierInterface[] elements;
-    IdentifierInterface test;
 
     public Set(){
-		//System.out.println("Set created ewf ewg");
 	}
-	
-	public void outputSet(){
-		System.out.println("The set is:");
-		Iterator iterator = identifiers.iterator();
-		
 
-        while(iterator.hasNext()){
-			System.out.println(iterator.next());
-            //String value = (it.next()).elements;
-            //System.out.println(value);
-        }
-    }
+	public Set (Set src) {
+		this.elements = src.elements;
+	}
 
     // INTEFACE METHODS
     public void init() {
-		this.identifiers.clear();		
+		this.elements.clear();		
+	}
+
+	public LinkedList<IdentifierInterface> getSet() {
+		return this.elements;
 	}
 
 	public void remove(IdentifierInterface identifier) {
-		// TODO Auto-generated method stub
-		
+		elements.remove(identifier);		
 	}
 
 	public IdentifierInterface get() {
-		// TODO Auto-generated method stub
+		/*
+		Iterator<IdentifierInterface> iterator = elements.iterator();
+
+		REMOVE FROM A COPY?
+		
+		if (iterator.hasNext()) {
+
+			return iterator.next(); 
+		}
+		*/
+		
 		return null;
 	}
 
-	public boolean contains(IdentifierInterface identifier) {
-		// TODO Auto-generated method stub
+	public boolean contains(IdentifierInterface compareIdentifier) {
+		for (IdentifierInterface identifier : elements) {
+			if (identifier.getContent().equals(compareIdentifier.getContent())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	public int size() {
-		return identifiers.size();
+		return elements.size();
 	}
 
 	public void addIdentifier(IdentifierInterface identifier) { 
-    	this.identifiers.add(identifier);
+		if (!this.contains(identifier)) {
+			this.elements.add(identifier);
+		}
     }
 
-	public SetInterface difference(SetInterface set) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set difference(Set set) {
+		Set resultSet = new Set();
+
+		for (IdentifierInterface identifier : this.elements) {
+			if (! set.contains(identifier)) {
+				resultSet.addIdentifier(identifier);
+			}
+		}
+
+		return resultSet;
 	}
 
-	public SetInterface intersection(SetInterface set) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set intersection(Set set) {
+		Set resultSet = new Set();
+
+		for (IdentifierInterface identifier : this.elements) {
+			if (set.contains(identifier)) {
+				resultSet.addIdentifier(identifier);
+			}
+		}
+
+		return resultSet;
 	}
 
-	public SetInterface union(SetInterface set) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set union(Set set) {
+		Set resultSet = new Set(this);
+
+		for (IdentifierInterface identifier : set.elements) {
+			resultSet.addIdentifier(identifier);
+		}
+
+		return resultSet;
 	}
 
-	public SetInterface symmetricDifference(SetInterface set) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set symmetricDifference(Set set) {
+
+		System.out.println(this.printSet());
+		System.out.println(set.printSet());
+
+		Set difference1 = this.difference(set);
+		Set difference2 = set.difference(this);
+
+		Set resultSet = difference1.union(difference2);
+
+		return resultSet;
     }
 
+
+	// ADDITIONAL METHODS
+	public String printSet(){
+		
+		String set = "";
+		int i = 0;
+
+		set += '{';
+
+		while (i < this.size()) {
+			set += elements.get(i).getContent();
+
+			if (i != this.size() - 1) {
+				set += (' ');
+			}
+
+			i++;
+		}
+
+		set += '}';
+
+		return set;
+
+    }
+	
 }
