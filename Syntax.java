@@ -16,9 +16,21 @@ public class Syntax {
         return input.hasNext("[a-zA-Z]");
     }
 
-    // Method to check if the next character is a '{'. When called it moves the Scanner forward.
+    public static boolean nextCharIsSpace(Scanner input){ 
+        return input.hasNext(" ");
+    }
+
+    public static boolean nextCharIsOpen(Scanner input){ 
+        return input.hasNext("\\{");
+    }
+
+    public static boolean nextCharIsClose(Scanner input){ 
+        return input.hasNext("\\}");
+    }
+
+    // Methods to move the Scanner forward if the next character meets the condition
     public static boolean isClose (Scanner input) throws Exception {
-        if (! input.hasNext("\\}")) {
+        if (! nextCharIsClose(input)) {
             throw new Exception("Error: isClose");
         } 
         input.next();
@@ -26,7 +38,7 @@ public class Syntax {
     }
 
     public static boolean isOpen (Scanner input) throws Exception {
-        if (! input.hasNext("\\{")) {
+        if (! nextCharIsOpen(input)) {
             throw new Exception("Error: isOpen");
         } 
         input.next();
@@ -34,7 +46,7 @@ public class Syntax {
     }
 
     public static boolean isSpace (Scanner input) throws Exception {
-        if (! input.hasNext(" ")) {
+        if (! nextCharIsSpace(input)) {
             throw new Exception("Error: space");
         } 
         input.next();
@@ -55,7 +67,7 @@ public class Syntax {
         return getContent(input);
     }
 
-    // method to get the contents of input
+    // Method to get the contents of input
     public static char getContent (Scanner input) {
         String character = input.next();
         return character.charAt(0);

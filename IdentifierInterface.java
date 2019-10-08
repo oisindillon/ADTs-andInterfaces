@@ -25,7 +25,7 @@ IdentifierInterface copy();
  *  POST - A new identifier with the same elements
  */
 
-boolean equals(IdentifierInterface id);
+boolean equals(IdentifierInterface i);
 /*  PRE - 
  *  POST - Returns true if this is equal to identifier chosen
  */

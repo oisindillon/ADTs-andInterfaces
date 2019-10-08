@@ -18,70 +18,53 @@ public class Program{
 
     }
     
-
     boolean getSets (Scanner input, Set set1, Set set2) {
         return getSet(input, "Give first set : ", set1) && 
                getSet(input, "Give second set : ", set2);
     }
-    
-    /*
-    void eoln (Scanner input) throws Exception {
-        if (input.hasNext()) {
-            System.out.println("Next is: " + input.next());
-            throw new Exception("Error: hasNext");
-        } else {
-            System.out.println("End of line");
-        }
-    }
-    */
-
-
-    /*
-    Identifier[] identifiersRow (Scanner input) {
-        
-        Identifier[] result = new Identifier[20];
-        int count = 0;
- 
-        result[count] = (Identifier.identifier(input));
-    
-        while (input.hasNext(" ")) {
-            try {
-                Syntax.isSpace(input);
-                count++;
-                result[count] = (Identifier.identifier(input));
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-   
-            
-        }
-    
-        return result;
        
-    }
-    */
-   
      
     boolean getSet (Scanner input, String question, Set set) {
 
-        
+        // check the input char by char 
         input.useDelimiter("");
-        Identifier identifierr = new Identifier();
+
+        // Start the process of checking input to create a set
         System.out.printf(question);
         try{  
-            Syntax.isOpen(input);
-            identifierr.identifier(input);
-            
-            //set.elements = identifiersRow(input);
 
-            //identifier.set(Identifier.identifier(input));
+            // initialize the set
+            set.init();
+
+            // check if the set starts with '{'
+            Syntax.isOpen(input);
+
+            while (! Syntax.nextCharIsClose(input)) {
+                
+                // if there are more spaces between the identifiers, skip them
+                while (Syntax.nextCharIsSpace(input)) {
+                    Syntax.isSpace(input);
+                }
+
+                // create a new identifier
+                Identifier identifier = new Identifier();
+                identifier.create(input);
+
+                // add the identifier to the set
+                set.addIdentifier(identifier);
+            }
             
+            // check if set terminates with '}'
             Syntax.isClose(input);
+
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
 
+        set.outputSet();
+        System.out.println(set.size());
         input.nextLine();
         return true;
         

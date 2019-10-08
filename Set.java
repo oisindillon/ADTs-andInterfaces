@@ -1,23 +1,31 @@
-import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.*;
 
 public class Set implements SetInterface {
+
+	LinkedList<IdentifierInterface> identifiers = new LinkedList<IdentifierInterface>();
 
     IdentifierInterface[] elements;
     IdentifierInterface test;
 
-    
-    Scanner input;
-    char c;
-
     public Set(){
+		//System.out.println("Set created ewf ewg");
+	}
+	
+	public void outputSet(){
+		System.out.println("The set is:");
+		Iterator iterator = identifiers.iterator();
+		
+
+        while(iterator.hasNext()){
+			System.out.println(iterator.next());
+            //String value = (it.next()).elements;
+            //System.out.println(value);
+        }
     }
 
     // INTEFACE METHODS
-
     public void init() {
-		// TODO Auto-generated method stub
-		
+		this.identifiers.clear();		
 	}
 
 	public void remove(IdentifierInterface identifier) {
@@ -36,18 +44,12 @@ public class Set implements SetInterface {
 	}
 
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return identifiers.size();
 	}
 
 	public void addIdentifier(IdentifierInterface identifier) { 
-        this.test = identifier;
+    	this.identifiers.add(identifier);
     }
-
-    public String getElement() {
-        return "Set: {" + this.test.getIdentifier() + "}";
-	}
-    
 
 	public SetInterface difference(SetInterface set) {
 		// TODO Auto-generated method stub
@@ -68,63 +70,5 @@ public class Set implements SetInterface {
 		// TODO Auto-generated method stub
 		return null;
     }
-    
 
-
-
-
-    String errorCheck(){
-        /*
-        if(!nextCharIsOpen(c)){
-            return "You have to open the set with '{' ";        //error checks the first opening of the set
-        }
-        //init set
-        int i=0;
-        while(i<20){
-            identErrorCheck();              //error checks up to 20 identifiers
-            i++;
-        }
-        if(i>20){
-            return "There are too many elements in your set";   //makes sure correct number of identifiers are allowed in set
-        }
-        if(!nextCharIsClose(c)){                            //error checks set closing
-            return "You have to close the set with '}' ";
-        }
-        */
-        return "";
-    }
-
-    String identErrorCheck(){
-        /*
-        if(!nextCharIsLetter()){
-            return "First character of each element has to be from the alphabet";       //checks first letter of identifer
-            //init identifier and add character to identifier
-            
-        }
-        else{                                           //checks the following identifier characters
-            boolean end = false;
-            while(end == false){
-                if(!nextCharIsDigit() && !nextCharIsLetter()){
-                    return "All characters in Identifiers have to be alphanumeric";
-                }
-                if(nextCharIsSpace(c)){                                 //ends identifier and starts new one
-                    end = true;
-                    return null;
-                    //stop characters saving to identifier and leave identifier
-
-                }
-                else{
-                    //save specified character to an identifier
-                }
-            }
-        }
-        */
-        return null;
-        
-    }
-
-
-
-
-    
 }
