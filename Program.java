@@ -94,7 +94,19 @@ public class Program{
     void calculate(Set set1, Set set2) {
         System.out.println("difference = " + set1.difference(set2).printSet());
         System.out.println("intersection = " + set1.intersection(set2).printSet());
-        System.out.println("union = " + set1.union(set2).printSet());
-        System.out.println("sym. diff. = " + set1.symmetricDifference(set2).printSet());
+        
+        try {
+            System.out.println("union = " + set1.union(set2).printSet());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("sym. diff. = " + set1.symmetricDifference(set2).printSet());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.print("\n");
     }
 }

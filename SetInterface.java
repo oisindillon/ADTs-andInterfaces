@@ -62,13 +62,13 @@ Set intersection (Set set);
     POST - a new set that is the intersection of both sets is returned
 */ 
 
-Set union (Set set); 
+Set union (Set set) throws Exception; 
 /*  PRE  - 
     POST - success: a new set that is the union of both sets is returned
            failure: if the union of both sets exceeds 20 elements, a "set is full" error occurs
 */ 
 
-Set symmetricDifference (Set set); 
+Set symmetricDifference (Set set) throws Exception; 
 /*  PRE  -  
     POST -  success: a new set that is the symmetric difference of both sets is returned
             failure: the symmetric difference of both sets exceeds 20 elements, a "set is full" error occurs

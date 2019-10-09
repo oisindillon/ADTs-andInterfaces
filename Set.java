@@ -8,9 +8,6 @@ public class Set implements SetInterface {
     public Set(){
 	}
 
-	public Set (Set src) {
-		this.elements = src.elements;
-	}
 
     // INTEFACE METHODS
     public void init() {
@@ -83,25 +80,44 @@ public class Set implements SetInterface {
 		return resultSet;
 	}
 
-	public Set union(Set set) {
-		Set resultSet = new Set(this);
+	public Set union(Set set) throws Exception {
 
+		Set resultSet = new Set();
+
+		// add all elements of the first set
+		for (IdentifierInterface identifier : this.elements) {
+			resultSet.addIdentifier(identifier);
+		}
+		
+		// add all elements of the second set (add operations doesn't change the set if the identifier exists in pre- set)
 		for (IdentifierInterface identifier : set.elements) {
 			resultSet.addIdentifier(identifier);
 		}
 
+		if (resultSet.size() > MAX_SET_LENGTH) {
+			throw new Exception("Union of the sets exceeds " + MAX_SET_LENGTH + " elements.");
+		}
+	
 		return resultSet;
 	}
 
-	public Set symmetricDifference(Set set) {
+	public Set symmetricDifference(Set set) throws Exception {
 
-		System.out.println(this.printSet());
-		System.out.println(set.printSet());
-
+		Set resultSet = new Set(); 
+		
+		// Get A / B
 		Set difference1 = this.difference(set);
+
+		// Get B / A
 		Set difference2 = set.difference(this);
 
-		Set resultSet = difference1.union(difference2);
+		// Add the resulting sets
+		try {
+			resultSet = difference1.union(difference2);
+		} catch (Exception e) {
+			throw new Exception("Symmetric difference of the sets exceeds " + MAX_SET_LENGTH + " elements.");
+		}
+
 
 		return resultSet;
     }
