@@ -41,10 +41,12 @@ public class Set implements SetInterface {
 		return elements.size();
 	}
 
-	public void addIdentifier(IdentifierInterface identifier) { 
-		if (!this.contains(identifier)) {
-			this.elements.add(identifier);
+	public boolean addIdentifier(IdentifierInterface identifier) { 
+		if (this.contains(identifier)) {
+			return false;
 		}
+		this.elements.add(identifier);
+		return true;
     }
 
 
@@ -118,7 +120,7 @@ public class Set implements SetInterface {
 
 
 	// ADDITIONAL METHODS
-	
+
 	public String printSet(){
 		
 		String set = "";

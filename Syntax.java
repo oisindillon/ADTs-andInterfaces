@@ -28,6 +28,10 @@ public class Syntax {
         return input.hasNext("\\}");
     }
 
+    public static boolean nextCharIsEOLN(Scanner input){ 
+        return input.hasNext("\\s");
+    }
+
     // Methods to move the Scanner forward if the next character meets the condition
     public static boolean isClose (Scanner input) throws Exception {
         if (! nextCharIsClose(input)) {
@@ -65,6 +69,17 @@ public class Syntax {
             throw new Exception("Error: not alphanumeric");
         } 
         return getContent(input);
+    }
+
+    public static boolean eoln (Scanner input) throws Exception {
+        while (nextCharIsSpace(input)) {
+            isSpace(input);
+        }
+
+        if (! nextCharIsEOLN(input)) {
+            throw new Exception("Syntax Error: There should be no characters after the '}'.");
+        } 
+        return true;
     }
 
     // Method to get the contents of input

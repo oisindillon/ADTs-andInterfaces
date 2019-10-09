@@ -46,9 +46,9 @@ int size();
     POST   - The amount of elements of the set is returned
 */ 
 
-void addIdentifier (IdentifierInterface identifier);
+boolean addIdentifier (IdentifierInterface identifier);
 /*  PRE    - 
-    POST   - success: identifier is in the set
+    POST   - success: identifier is in the set 
              failure: if size of set @pre is 20 and identifier not in set @pre, then no changes, set @pre == set @post
 */ 
 

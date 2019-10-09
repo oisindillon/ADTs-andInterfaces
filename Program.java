@@ -50,12 +50,18 @@ public class Program{
                 identifier.create(input);
 
                 // add the identifier to the set
-                set.addIdentifier(identifier);
+                if (! set.addIdentifier(identifier)) {
+                    throw new Exception("Operation Error: A set cannot contain duplicate identifiers.");
+                }
                 
             }
             
             // check if set terminates with '}'
             Syntax.isClose(input);
+            
+            // check if there are any character after the '}' (spaces are not treated as characters)
+            Syntax.eoln(input);   
+           
 
             input.nextLine();
 

@@ -23,7 +23,6 @@ public class Identifier implements IdentifierInterface {
                 throw new Exception("Syntax error: An identifier must start with a letter.");
             }
         } 
-
         this.content = content.valueOf(c);
     }
     
@@ -68,8 +67,15 @@ public class Identifier implements IdentifierInterface {
             char c;
 
             // initialize the identifier with with the first character
-            c = Syntax.getContent(input);
-            init(c);
+            if (Syntax.nextCharIsEOLN(input)) {
+                throw new Exception("Syntax error: The set should end with '}'.");
+            } else if (!Syntax.nextCharIsAlphanumeric(input)) {
+                throw new Exception("Syntax error: Non-alphanumeric characters are not allowed.");
+            } else {
+                c = Syntax.getContent(input);
+                init(c);
+            }
+            
             
             // if more characters follow, append them to the identifier
             while (Syntax.nextCharIsAlphanumeric(input)) {
