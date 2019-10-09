@@ -57,39 +57,20 @@ public class Program{
             // check if set terminates with '}'
             Syntax.isClose(input);
 
-            
+            input.nextLine();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            input.nextLine();
+
+            // if an error occurs, repeat the function until no errors found
+            getSet(input, question, set);
         }
 
-        input.nextLine();
         return true;
-        
-
-
-        /*
-        do {
-            System.out.printf("%s", question);
-            
-            if (! input.hasNextLine()) {
-                System.out.printf("\n"); 
-                return false;
-            }
-        } while (! validSet(input, set));
-        */
         
     }
     
-    boolean validSet(Scanner input, Set setToValidate) {
-        boolean valid = true;
-        //call function to check errors
-        if(valid) {
-            System.out.println("Input is: " + input);
-        }
-        
-        return valid; //assume it's valid
-    }
 
     void calculate(Set set1, Set set2) {
         System.out.println("difference = " + set1.difference(set2).printSet());

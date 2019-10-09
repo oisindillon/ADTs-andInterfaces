@@ -23,16 +23,7 @@ public class Set implements SetInterface {
 	}
 
 	public IdentifierInterface get() {
-		/*
-		Iterator<IdentifierInterface> iterator = elements.iterator();
-
-		REMOVE FROM A COPY?
-		
-		if (iterator.hasNext()) {
-
-			return iterator.next(); 
-		}
-		*/
+		// Do we need to implement this? 
 		
 		return null;
 	}
@@ -55,6 +46,9 @@ public class Set implements SetInterface {
 			this.elements.add(identifier);
 		}
     }
+
+
+	// SET OPERATIONS 
 
 	public Set difference(Set set) {
 		Set resultSet = new Set();
@@ -124,6 +118,7 @@ public class Set implements SetInterface {
 
 
 	// ADDITIONAL METHODS
+	
 	public String printSet(){
 		
 		String set = "";
