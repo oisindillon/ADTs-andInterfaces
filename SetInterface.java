@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public interface SetInterface{
 
 public static final int MAX_SET_LENGTH = 20; 
@@ -46,32 +48,37 @@ int size();
     POST   - The amount of elements of the set is returned
 */ 
 
-boolean addIdentifier (IdentifierInterface identifier);
+boolean addIdentifier (IdentifierInterface identifier) throws Exception;
 /*  PRE    - 
     POST   - success: identifier is in the set 
              failure: if size of set @pre is 20 and identifier not in set @pre, then no changes, set @pre == set @post
 */ 
 
-Set difference (Set set); 
+Set difference (SetInterface set); 
 /*  PRE  -  
     POST - a new set that is the difference of both sets is returned
 */ 
 
-Set intersection (Set set); 
+Set intersection (SetInterface set); 
 /*  PRE  -  
     POST - a new set that is the intersection of both sets is returned
 */ 
 
-Set union (Set set) throws Exception; 
+Set union (SetInterface set) throws Exception; 
 /*  PRE  - 
     POST - success: a new set that is the union of both sets is returned
            failure: if the union of both sets exceeds 20 elements, a "set is full" error occurs
 */ 
 
-Set symmetricDifference (Set set) throws Exception; 
+Set symmetricDifference (SetInterface set) throws Exception; 
 /*  PRE  -  
     POST -  success: a new set that is the symmetric difference of both sets is returned
             failure: the symmetric difference of both sets exceeds 20 elements, a "set is full" error occurs
 */
 
+
+Iterator<IdentifierInterface> iterator();
+/*  PRE  -  
+    POST -  an Iterator Object for the set is returned
+*/
 }

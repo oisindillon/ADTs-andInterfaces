@@ -1,8 +1,10 @@
 import java.util.*;
 
-public class Set implements SetInterface {
+public class Set implements SetInterface, Iterable<IdentifierInterface>{
 
-	private LinkedList<IdentifierInterface> elements = new LinkedList<IdentifierInterface>();
+	IdentifierInterface[] elements = new IdentifierInterface[MAX_SET_LENGTH];
+	int startIndex = 0;
+	int size = 0; 
 
 
     public Set(){
@@ -11,26 +13,54 @@ public class Set implements SetInterface {
 
     // INTEFACE METHODS
     public void init() {
-		this.elements.clear();		
+		for (int i = 0; i < MAX_SET_LENGTH; i++) {
+			elements[i] = null;
+		}
+		this.startIndex = 0;
+		this.size = 0;
 	}
 
-	public LinkedList<IdentifierInterface> getSet() {
+	public IdentifierInterface[] getSet() {
 		return this.elements;
 	}
 
 	public void remove(IdentifierInterface identifier) {
-		elements.remove(identifier);		
+		
+		if (this.contains(identifier)) {
+			Iterator<IdentifierInterface> iterator = this.iterator();
+			
+			
+			// Iterate through the array until the identifier is found
+			while (iterator.hasNext()) {
+				
+				IdentifierInterface currentIdentifier = iterator.next();
+				
+				// When found, move the starting identifier into its place
+				if (currentIdentifier.equals(identifier)) {
+					
+					IdentifierInterface firstIdentifier = this.get();
+					currentIdentifier = firstIdentifier;
+					firstIdentifier = null;
+					
+					startIndex++;
+					size--;
+					
+					return;
+				}
+			}
+		}
 	}
 
+
 	public IdentifierInterface get() {
-		// Do we need to implement this? 
-		
-		return null;
+		IdentifierInterface identifier = elements[startIndex];
+		return identifier;
 	}
 
 	public boolean contains(IdentifierInterface compareIdentifier) {
+		
 		for (IdentifierInterface identifier : elements) {
-			if (identifier.getContent().equals(compareIdentifier.getContent())) {
+			if (identifier != null && identifier.getContent().equals(compareIdentifier.getContent())) {
 				return true;
 			}
 		}
@@ -38,66 +68,116 @@ public class Set implements SetInterface {
 	}
 
 	public int size() {
-		return elements.size();
+		return size;
 	}
 
-	public boolean addIdentifier(IdentifierInterface identifier) { 
-		if (this.contains(identifier)) {
-			return false;
+	public boolean addIdentifier(IdentifierInterface identifier) throws Exception { 
+		
+		System.out.println("Add " + identifier.getContent());
+		
+		// Case: @pre contains 20 elements
+		if (size == MAX_SET_LENGTH) {
+			throw new Exception("Operation Error: The set has reached a maximum of " + MAX_SET_LENGTH + " elements.");
 		}
-		this.elements.add(identifier);
+		
+		// Case: @pre contains the identifier
+		else if (this.contains(identifier)) {
+			throw new Exception("Operation Error: The set must not contain any duplicates. Remove any extra occurances of '" + identifier.getContent() + "'.");
+		}
+	
+		// Case: the identifier can be added successfully
+		this.elements[(startIndex+size) % MAX_SET_LENGTH] = identifier;
+		size++;
+		
 		return true;
     }
 
 
 	// SET OPERATIONS 
 
-	public Set difference(Set set) {
+	public Set difference(SetInterface set) {
+		
 		Set resultSet = new Set();
+		
+		Iterator<IdentifierInterface> iterator = this.iterator();
 
-		for (IdentifierInterface identifier : this.elements) {
-			if (! set.contains(identifier)) {
-				resultSet.addIdentifier(identifier);
+		// Iterate through the second set 
+    	while (iterator.hasNext()) {
+    		
+    		IdentifierInterface currentIdentifier = iterator.next();
+    		
+    		// If an element from the first set is not in the second set, 
+    		// add it to the result set
+    		if (! set.contains(currentIdentifier)) {
+				try {
+					resultSet.addIdentifier(currentIdentifier);
+				} catch (Exception e) {
+					e.getMessage();
+				}
 			}
-		}
 
+    	}
+
+    	
 		return resultSet;
 	}
 
-	public Set intersection(Set set) {
+	public Set intersection(SetInterface set) {
+		
 		Set resultSet = new Set();
+		
+		Iterator<IdentifierInterface> iterator = this.iterator();
 
-		for (IdentifierInterface identifier : this.elements) {
-			if (set.contains(identifier)) {
-				resultSet.addIdentifier(identifier);
+		// Iterate through the second set 
+    	while (iterator.hasNext()) {
+    		
+    		IdentifierInterface currentIdentifier = iterator.next();
+    		
+    		// If an element from the first set is in the second set, 
+    		// add it to the result set
+    		if (set.contains(currentIdentifier)) {
+				try {
+					resultSet.addIdentifier(currentIdentifier);
+				} catch (Exception e) {
+					e.getMessage();
+				}
 			}
-		}
+
+    	}
+
 
 		return resultSet;
+
 	}
 
-	public Set union(Set set) throws Exception {
+	public Set union(SetInterface set) throws Exception {
 
 		Set resultSet = new Set();
 
 		// add all elements of the first set
-		for (IdentifierInterface identifier : this.elements) {
-			resultSet.addIdentifier(identifier);
-		}
+		Iterator<IdentifierInterface> iterator = this.iterator();
 		
-		// add all elements of the second set (add operations doesn't change the set if the identifier exists in pre- set)
-		for (IdentifierInterface identifier : set.elements) {
-			resultSet.addIdentifier(identifier);
-		}
-
-		if (resultSet.size() > MAX_SET_LENGTH) {
-			throw new Exception("Union of the sets exceeds " + MAX_SET_LENGTH + " elements.");
-		}
-	
+    	while (iterator.hasNext()) {
+    		resultSet.addIdentifier(iterator.next());
+    	}
+    	
+    	// add all elements of the first set
+		iterator = set.iterator();
+		
+    	while (iterator.hasNext()) {
+    		
+    		// try-catch ignores the errors about duplicates and continues on adding the identifiers
+    		try {
+    			resultSet.addIdentifier(iterator.next());
+    		} catch (Exception e) {
+    			
+    		}
+    	}	
+    	
 		return resultSet;
 	}
 
-	public Set symmetricDifference(Set set) throws Exception {
+	public Set symmetricDifference(SetInterface set) throws Exception {
 
 		Set resultSet = new Set(); 
 		
@@ -108,40 +188,43 @@ public class Set implements SetInterface {
 		Set difference2 = set.difference(this);
 
 		// Add the resulting sets
-		try {
-			resultSet = difference1.union(difference2);
-		} catch (Exception e) {
-			throw new Exception("Symmetric difference of the sets exceeds " + MAX_SET_LENGTH + " elements.");
-		}
-
+		resultSet = difference1.union(difference2);
 
 		return resultSet;
     }
 
 
-	// ADDITIONAL METHODS
 
-	public String printSet(){
+
+	@Override
+	public Iterator<IdentifierInterface> iterator() {
+		return new SetIterator(elements);
+	}
+	
+	
+	public class SetIterator implements Iterator<IdentifierInterface> {
 		
-		String set = "";
-		int i = 0;
+		int current = startIndex;
 
-		set += '{';
-
-		while (i < this.size()) {
-			set += elements.get(i).getContent();
-
-			if (i != this.size() - 1) {
-				set += (' ');
-			}
-
-			i++;
+		public SetIterator(IdentifierInterface[] elements) {
 		}
 
-		set += '}';
+		@Override
+		public boolean hasNext() {
+			return elements[current] != null;
+		}
 
-		return set;
-
-    }
+		@Override
+		public IdentifierInterface next() {
+									
+			IdentifierInterface identifier = (IdentifierInterface) elements[current];
+			
+			current = (current+1) % MAX_SET_LENGTH;
+						
+			return identifier;
+		}
+		
+	}	
+	
 	
 }

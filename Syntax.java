@@ -35,7 +35,7 @@ public class Syntax {
     // Methods to move the Scanner forward if the next character meets the condition
     public static boolean isClose (Scanner input) throws Exception {
         if (! nextCharIsClose(input)) {
-            throw new Exception("Error: isClose");
+            throw new Exception("Syntax error: The set should end with '}'.");
         } 
         input.next();
         return true;
@@ -43,7 +43,7 @@ public class Syntax {
 
     public static boolean isOpen (Scanner input) throws Exception {
         if (! nextCharIsOpen(input)) {
-            throw new Exception("Error: isOpen");
+            throw new Exception("Syntax error: The set should start with '{'.");
         } 
         input.next();
         return true;
@@ -59,16 +59,26 @@ public class Syntax {
 
     public static char isLetter (Scanner input) throws Exception {
         if (! nextCharIsLetter(input)) {
-            throw new Exception("Error: not a letter");
+            throw new Exception("Syntax Error: An identifier must start with a letter.");
         } 
         return getContent(input);
     }    
 
     public static char isAlphanumeric (Scanner input) throws Exception {
         if (! nextCharIsAlphanumeric(input)) {
-            throw new Exception("Error: not alphanumeric");
+            throw new Exception("Syntax Error: An identifier can only contain alphanumeric characters.");
         } 
         return getContent(input);
+    }
+    
+    public static void skipSpaces (Scanner input) {
+        while (Syntax.nextCharIsSpace(input)) {
+            try {
+                Syntax.isSpace(input);
+            } catch (Exception e) {
+
+            }            
+        }
     }
 
     public static boolean eoln (Scanner input) throws Exception {

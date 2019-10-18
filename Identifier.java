@@ -1,30 +1,31 @@
-import java.util.regex.Pattern;
 import java.util.Scanner;
 
 public class Identifier implements IdentifierInterface {
 
-    String content;
+    StringBuffer content;
 
-    public void addChar(char c) {
-        String character = "";
-        character = character.valueOf(c);
-        Scanner scanner = new Scanner(character);
-
-        if (content != null && Syntax.nextCharIsAlphanumeric(scanner)) {
-            this.content += c;
-        } 
+    
+    public Identifier(char c) throws Exception {
+		init(c);
+	}
+    
+    public Identifier () {
     }
 
-    public void init(char c) throws Exception {
-        if (! Character.isLetter(c)) {
-            if (c == '}') {
-                throw new Exception("Syntax error: There should be no spaces after the last identifier.");
-            } else {
-                throw new Exception("Syntax error: An identifier must start with a letter.");
-            }
-        } 
-        this.content = content.valueOf(c);
-    }
+    @Override
+	public void addChar (char c) {
+		this.content.append(c);
+	}
+
+    public void init (char c) throws Exception {	
+		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+			StringBuffer sb = new StringBuffer(String.valueOf(c));
+			this.content = sb;
+		}
+		else {
+			throw new Exception("Syntax Error: An Identifier must start with a letter.");
+		}
+	}
     
     public IdentifierInterface copy() {
         Identifier copiedIdentifier = new Identifier();
@@ -54,7 +55,7 @@ public class Identifier implements IdentifierInterface {
         if (content == null) {
             return null;
         }
-        return this.content;
+        return this.content.toString();
     }
 
     public int size() {
