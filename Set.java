@@ -73,8 +73,6 @@ public class Set implements SetInterface, Iterable<IdentifierInterface>{
 
 	public boolean addIdentifier(IdentifierInterface identifier) throws Exception { 
 		
-		System.out.println("Add " + identifier.getContent());
-		
 		// Case: @pre contains 20 elements
 		if (size == MAX_SET_LENGTH) {
 			throw new Exception("Operation Error: The set has reached a maximum of " + MAX_SET_LENGTH + " elements.");
