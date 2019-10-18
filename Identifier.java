@@ -1,16 +1,16 @@
-import java.util.Scanner;
 
 public class Identifier implements IdentifierInterface {
 
-    StringBuffer content;
+    private StringBuffer content;
 
     
     public Identifier(char c) throws Exception {
 		init(c);
 	}
-    
-    public Identifier () {
-    }
+	
+	private Identifier() {
+		this.content = new StringBuffer();
+	}
 
     @Override
 	public void addChar (char c) {
@@ -28,14 +28,14 @@ public class Identifier implements IdentifierInterface {
 	}
     
     public IdentifierInterface copy() {
-        Identifier copiedIdentifier = new Identifier();
-        copiedIdentifier.content = this.content;
+    	Identifier copiedIdentifier = new Identifier();
+		copiedIdentifier.content = new StringBuffer(new String(this.getContent()));
         return copiedIdentifier;
     }
 
     
     public boolean equals(IdentifierInterface id) {
-        if (this.content.equals(id.getContent())) {
+        if (this.getContent().equals(id.getContent())) {
             return true;
         }
         return false;
@@ -62,32 +62,4 @@ public class Identifier implements IdentifierInterface {
         return this.content.length();
     }
 
-    public boolean create (Scanner input) throws Exception {
-        
-        try {
-            char c;
-
-            // initialize the identifier with with the first character
-            if (Syntax.nextCharIsEOLN(input)) {
-                throw new Exception("Syntax error: The set should end with '}'.");
-            } else if (!Syntax.nextCharIsAlphanumeric(input)) {
-                throw new Exception("Syntax error: Non-alphanumeric characters are not allowed.");
-            } else {
-                c = Syntax.getContent(input);
-                init(c);
-            }
-            
-            
-            // if more characters follow, append them to the identifier
-            while (Syntax.nextCharIsAlphanumeric(input)) {
-                c = Syntax.getContent(input);
-                addChar(c);
-            }      
-            
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        return true;
-    }
 }

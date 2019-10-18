@@ -16,9 +16,6 @@ public static final int MAX_SET_LENGTH = 20;
  *   PRE  -
  *   POST - A new Set-object has been created and is an empty set
  * 
- * Set (Set src);
- *   PRE  -
- *   POST - A new Set-object has been created and is a copy of src
  * 
  */
 

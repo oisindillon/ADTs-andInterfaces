@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Set implements SetInterface, Iterable<IdentifierInterface>{
 
-	IdentifierInterface[] elements = new IdentifierInterface[MAX_SET_LENGTH];
-	int startIndex = 0;
-	int size = 0; 
+	private IdentifierInterface[] elements = new IdentifierInterface[MAX_SET_LENGTH];
+	private int startIndex = 0;
+	private int size = 0; 
 
 
     public Set(){
@@ -18,10 +18,6 @@ public class Set implements SetInterface, Iterable<IdentifierInterface>{
 		}
 		this.startIndex = 0;
 		this.size = 0;
-	}
-
-	public IdentifierInterface[] getSet() {
-		return this.elements;
 	}
 
 	public void remove(IdentifierInterface identifier) {
@@ -53,6 +49,9 @@ public class Set implements SetInterface, Iterable<IdentifierInterface>{
 
 
 	public IdentifierInterface get() {
+		if (elements[startIndex] == null) {
+			return null;
+		}
 		IdentifierInterface identifier = elements[startIndex];
 		return identifier;
 	}
@@ -89,6 +88,24 @@ public class Set implements SetInterface, Iterable<IdentifierInterface>{
 		
 		return true;
     }
+	
+	public SetInterface copy() {	
+		
+		SetInterface setCopy =  new Set();
+		
+		for (int i=0; i<MAX_SET_LENGTH; i++) {
+			try {
+				setCopy.addIdentifier(this.elements[i].copy());
+			} catch (Exception e) {
+				
+			}
+		}
+		
+	
+		
+		return setCopy;
+	}
+
 
 
 	// SET OPERATIONS 
@@ -193,6 +210,7 @@ public class Set implements SetInterface, Iterable<IdentifierInterface>{
 
 
 
+	// ITERATOR
 
 	@Override
 	public Iterator<IdentifierInterface> iterator() {

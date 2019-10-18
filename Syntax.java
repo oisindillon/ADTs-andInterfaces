@@ -51,7 +51,7 @@ public class Syntax {
 
     public static boolean isSpace (Scanner input) throws Exception {
         if (! nextCharIsSpace(input)) {
-            throw new Exception("Error: space");
+            throw new Exception("Syntax Error: The identifiers should be separated by whitespaces only.");
         } 
         input.next();
         return true;
